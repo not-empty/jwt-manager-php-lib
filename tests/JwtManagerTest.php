@@ -54,7 +54,7 @@ class JwtManagerTest extends TestCase
         $token = $JwtManager->generate('token', '68162dc1-a392-491f-9d46-639f0e0f179d');
         
         $this->assertIsString($token);
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '^([a-zA-Z0-9_=]{4,})\.([a-zA-Z0-9_=]{4,})\.([a-zA-Z0-9_\-\+\/=]{4,})^',
             $token
         );
