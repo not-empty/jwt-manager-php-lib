@@ -4,7 +4,7 @@
 [![codecov](https://codecov.io/gh/not-empty/jwt-manager-php-lib/graph/badge.svg?token=AEMV163UW6)](https://codecov.io/gh/not-empty/jwt-manager-php-lib)
 [![CI Build](https://img.shields.io/github/actions/workflow/status/not-empty/jwt-manager-php-lib/php.yml)](https://github.com/not-empty/jwt-manager-php-lib/actions/workflows/php.yml)
 [![Downloads Old](https://img.shields.io/packagist/dt/kiwfy/jwt-manager-php?logo=old&label=downloads%20legacy)](https://packagist.org/packages/kiwfy/jwt-manager-php)
-[![Downloads](https://img.shields.io/packagist/dt/not-empty/jwt-manager-php-lib?logo=old&label=downloads)](https://packagist.org/packages/not-empty/jwt-manager-php-lib)
+[![Downloads](https://img.shields.io/packagist/dt/not-empty/jwt-manager-php-lib?logo=old&label=downloads&v2)](https://packagist.org/packages/not-empty/jwt-manager-php-lib)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![Packagist License (custom server)](https://img.shields.io/packagist/l/not-empty/jwt-manager-php-lib?v2)](https://github.com/not-empty/jwt-manager-php-lib/blob/master/LICENSE)
 
