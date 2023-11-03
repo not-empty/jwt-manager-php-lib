@@ -6,6 +6,8 @@ PHP library to manage JWT authentication
 
 ### Installation
 
+[Release 4.0.0](https://github.com/not-empty/jwt-manager-php-lib/releases/tag/4.0.0) Requires [PHP](https://php.net) 7.4
+
 [Release 3.0.0](https://github.com/not-empty/jwt-manager-php-lib/releases/tag/3.0.0) Requires [PHP](https://php.net) 7.3
 
 [Release 2.0.0](https://github.com/not-empty/jwt-manager-php-lib/releases/tag/2.0.0) Requires [PHP](https://php.net) 7.2
@@ -76,12 +78,12 @@ var_dump($result);
 if you want an environment to run or test it, you can build and install dependences like this
 
 ```sh
-docker build --build-arg PHP_VERSION=7.3.33-cli -t not-empty/jwt-manager-php-lib:php73 -f contrib/Dockerfile .
+docker build --build-arg PHP_VERSION=7.4.33-cli -t not-empty/jwt-manager-php-lib:php74 -f contrib/Dockerfile .
 ```
 
 Access the container
 ```sh
-docker run -v ${PWD}/:/var/www/html -it not-empty/jwt-manager-php-lib:php73 bash
+docker run -v ${PWD}/:/var/www/html -it not-empty/jwt-manager-php-lib:php74 bash
 ```
 
 Verify if all dependencies is installed
@@ -107,12 +109,12 @@ To ensure that the entire project is fine:
 First you need to building a correct environment to install all dependences
 
 ```sh
-docker build --build-arg PHP_VERSION=7.3.33-cli -t not-empty/jwt-manager-php-lib:php73 -f contrib/Dockerfile .
+docker build --build-arg PHP_VERSION=7.4.33-cli -t not-empty/jwt-manager-php-lib:php74 -f contrib/Dockerfile .
 ```
 
 Access the container
 ```sh
-docker run -v ${PWD}/:/var/www/html -it not-empty/jwt-manager-php-lib:php73 bash
+docker run -v ${PWD}/:/var/www/html -it not-empty/jwt-manager-php-lib:php74 bash
 ```
 
 Install all dependences
