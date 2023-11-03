@@ -6,7 +6,7 @@
 [![Downloads Old](https://img.shields.io/packagist/dt/kiwfy/jwt-manager-php?logo=old&label=downloads%20legacy)](https://packagist.org/packages/kiwfy/jwt-manager-php)
 [![Downloads](https://img.shields.io/packagist/dt/not-empty/jwt-manager-php-lib?logo=old&label=downloads)](https://packagist.org/packages/not-empty/jwt-manager-php-lib)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-[![Packagist License (custom server)](https://img.shields.io/packagist/l/not-empty/jwt-manager-php-lib)](https://github.com/not-empty/jwt-manager-php-lib/blob/master/LICENSE)
+[![Packagist License (custom server)](https://img.shields.io/packagist/l/not-empty/jwt-manager-php-lib?v2)](https://github.com/not-empty/jwt-manager-php-lib/blob/master/LICENSE)
 
 PHP library to manage JWT authentication
 
