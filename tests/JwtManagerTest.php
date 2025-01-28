@@ -272,6 +272,38 @@ class JwtManagerTest extends TestCase
         $this->assertFalse($need);
     }
 
+    /**
+     * @covers JwtManager\JwtManager::isValid
+     * @covers JwtManager\JwtManager::splitParts
+     * @covers JwtManager\JwtManager::getSignature
+     * @covers JwtManager\JwtManager::base64UrlEncode
+     */
+    public function testCustomPayload()
+    {
+        $JwtManager = new JwtManager(
+            $this->appSecret,
+            $this->context
+        );
+
+        $token = $JwtManager->generate(
+            'token',
+            '68162dc1-a392-491f-9d46-639f0e0f179d0',
+            [
+                'test' => 'test',
+            ]
+        );
+
+        $JwtManager = new JwtManager(
+            $this->appSecret,
+            $this->context
+        );
+
+        $payload = $JwtManager->decodePayload($token);
+
+        $this->assertIsArray($payload);
+        $this->assertEquals($payload['test'], 'test');
+    }
+
     protected function tearDown(): void
     {
         //
