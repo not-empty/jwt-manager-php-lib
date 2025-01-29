@@ -1,7 +1,7 @@
 {
     "name": "not-empty/jwt-manager-php-lib",
     "description": "PHP library to manage JWT authentication",
-    "version": "7.0.0",
+    "version": "7.0.1",
     "type": "library",
     "license": "GPL-3.0-only",
     "require": {
