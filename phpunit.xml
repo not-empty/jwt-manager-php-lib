@@ -1,31 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit backupGlobals="false"
-         backupStaticAttributes="false"
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/12.4/phpunit.xsd"
          bootstrap="vendor/autoload.php"
          colors="true"
-         convertErrorsToExceptions="true"
-         convertNoticesToExceptions="true"
-         convertWarningsToExceptions="true"
-         processIsolation="false"
-         stopOnFailure="false">
+         stopOnFailure="false"
+         cacheResult="true"
+         beStrictAboutTestsThatDoNotTestAnything="true">
+
     <testsuites>
         <testsuite name="Application Test Suite">
-            <directory suffix="Test.php">./tests</directory>
+            <directory suffix="Test.php">tests</directory>
         </testsuite>
     </testsuites>
-    <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">./src</directory>
-        </whitelist>
-    </filter>
+
+    <source>
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+    </source>
+
+    <coverage>
+        <report>
+            <html outputDirectory="coverage/" lowUpperBound="35" highLowerBound="70"/>
+            <text outputFile="php://stdout" showUncoveredFiles="false"/>
+            <clover outputFile="coverage/coverage.xml"/>
+        </report>
+    </coverage>
+
+    <logging>
+        <junit outputFile="coverage/logfile.xml"/>
+    </logging>
+
     <php>
         <env name="APP_ENV" value="testing"/>
+        <ini name="xdebug.mode" value="coverage"/>
     </php>
-    <logging>
-      <log type="coverage-html" target="coverage/" lowUpperBound="35" highLowerBound="70"/>
-      <log type="coverage-text" target="php://stdout" lowUpperBound="35" highLowerBound="70"/>
-      <log type="testdox-text" target="php://stdout" showUncoveredFiles="false"/>
-      <log type="coverage-clover" target="coverage/coverage.xml"/>
-      <log type="junit" target="coverage/logfile.xml"/>
-    </logging>
 </phpunit>

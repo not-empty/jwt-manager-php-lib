@@ -1,9 +1,21 @@
 #!/bin/sh
 
+#if you want to use pre-commit validations copy this file to .git/hooks/ inside your project folder
+
+container=`docker ps --format "{{.Names}}" --filter "name=-fpm"`
+
+if [ -z $container ]
+    then
+        echo "Your container name is not valid. Try put -php on the end of container's name."
+fi
+
 echo "Checking PHP Lint in src..."
-find ./src -name "*.php" -print0 | xargs -0 -n1 -P8 php -l -d display_errors=0
-find ./tests -name "*.php" -print0 | xargs -0 -n1 -P8 php -l -d display_errors=0
-find ./sample -name "*.php" -print0 | xargs -0 -n1 -P8 php -l -d display_errors=0
+docker exec $container find ./src -name "*.php" -print0 | docker exec $container xargs -0 -n1 -P8 php -l -d display_errors=0
+echo "Checking PHP Lint in tests..."
+docker exec $container find ./tests -name "*.php" -print0 | docker exec $container xargs -0 -n1 -P8 php -l -d display_errors=0
+echo "Checking PHP Lint in sample..."
+docker exec $container find ./sample -name "*.php" -print0 | docker exec $container xargs -0 -n1 -P8 php -l -d display_errors=0
+
 if [ $? != 0 ]
 then
     echo "Fix the PHP sintax errors before commit."
@@ -11,24 +23,27 @@ then
 fi
 
 echo "Running Code Sniffer..."
-./vendor/bin/phpcs
+docker exec $container ./vendor/bin/phpcs
+
 if [ $? != 0 ]
 then
     echo "Fix the Code Sniffers errors before commit."
     exit 1
 fi
 
-echo "Running PHP Mess Detector..."
-./vendor/bin/phpmd ./src text phpmd.xml
-./vendor/bin/phpmd ./sample text phpmd.xml
+echo "Running Mess Detector..."
+docker exec $container ./vendor/bin/phpmd ./src text phpmd.xml
+docker exec $container ./vendor/bin/phpmd ./sample text phpmd.xml
+
 if [ $? != 0 ]
 then
-    echo "Fix the PHP Mess Detector errors before commit."
+    echo "Fix the Mess Detector errors before commit."
     exit 1
 fi
 
 echo "Running Unit Tests..."
-phpdbg -qrr vendor/bin/phpunit --configuration phpunit.xml -d memory_limit=1024M
+docker exec $container php -d xdebug.mode=coverage vendor/bin/phpunit --configuration phpunit.xml --coverage-clover=coverage/coverage.xml -d memory_limit=1024M
+
 if [ $? != 0 ]
 then
     echo "Fix the Unit Tests errors before commit."
@@ -36,7 +51,7 @@ then
 fi
 
 echo "Checking Unit Coverage..."
-php contrib/coverage-checker.php coverage/coverage.xml 100
+docker exec $container php contrib/coverage-checker.php coverage/coverage.xml 100
 
 if [ $? != 0 ]
 then
