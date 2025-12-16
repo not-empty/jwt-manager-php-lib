@@ -2,22 +2,15 @@
 
 #if you want to use pre-commit validations copy this file to .git/hooks/ inside your project folder
 
-container=`docker ps --format "{{.Names}}" --filter "name=-fpm"`
+container=`docker ps --format "{{.Names}}" --filter "name=jwt-manager-php-lib"`
 
 if [ -z $container ]
     then
-        echo "Your container name is not valid. Try put -php on the end of container's name."
+        echo "Your container name is not valid. Try put jwt-manager-php-lib on the end of container's name."
 fi
 
-echo "Checking PHP Lint in src..."
-docker exec $container find ./src -name "*.php" -print0 | docker exec $container xargs -0 -n1 -P8 php -l -d display_errors=0
-echo "Checking PHP Lint in tests..."
-docker exec $container find ./tests -name "*.php" -print0 | docker exec $container xargs -0 -n1 -P8 php -l -d display_errors=0
-echo "Checking PHP Lint in sample..."
-docker exec $container find ./sample -name "*.php" -print0 | docker exec $container xargs -0 -n1 -P8 php -l -d display_errors=0
-
-if [ $? != 0 ]
-then
+docker exec -w /var/www/html "$container" composer lint
+if [ $? != 0 ]; then
     echo "Fix the PHP sintax errors before commit."
     exit 1
 fi
@@ -31,13 +24,12 @@ then
     exit 1
 fi
 
-echo "Running Mess Detector..."
-docker exec $container ./vendor/bin/phpmd ./src text phpmd.xml
-docker exec $container ./vendor/bin/phpmd ./sample text phpmd.xml
+echo "Running PHP Stan..."
+docker exec $container ./vendor/bin/phpstan analyse
 
 if [ $? != 0 ]
 then
-    echo "Fix the Mess Detector errors before commit."
+    echo "Fix the PHP Stan errors before commit."
     exit 1
 fi
 

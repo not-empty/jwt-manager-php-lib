@@ -122,7 +122,7 @@ class JwtManager
      * generate token
      * @param string $audience
      * @param string $subject
-     * @param array $payload
+     * @param array $customPayload
      * @return string
      */
     public function generate(

@@ -97,7 +97,7 @@ docker build --build-arg PHP_VERSION=8.4-cli -t not-empty/jwt-manager-php-lib:ph
 
 Access the container
 ```sh
-docker run -v ${PWD}/:/var/www/html -it not-empty/jwt-manager-php-lib:php84 bash
+docker run --name jwt-manager-php-lib -v ${PWD}/:/var/www/html -it not-empty/jwt-manager-php-lib:php84 bash
 ```
 
 Verify if all dependencies is installed
@@ -128,7 +128,7 @@ docker build --build-arg PHP_VERSION=8.4-cli -t not-empty/jwt-manager-php-lib:ph
 
 Access the container
 ```sh
-docker run -v ${PWD}/:/var/www/html -it not-empty/jwt-manager-php-lib:php84 bash
+docker run --name jwt-manager-php-lib -v ${PWD}/:/var/www/html -it not-empty/jwt-manager-php-lib:php84 bash
 ```
 
 Install all dependences
