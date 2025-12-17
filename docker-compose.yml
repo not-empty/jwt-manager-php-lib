@@ -1,0 +1,9 @@
+services:
+  jwt-manager-php-lib:
+    build:
+      context: ./
+      dockerfile: ./ops/Dockerfile
+    container_name: jwt-manager-php-lib
+    volumes:
+      - ./:/var/www/html
+    command: tail -f /dev/null
